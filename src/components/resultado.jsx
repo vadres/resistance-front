@@ -10,9 +10,9 @@ const Resultado = () => {
     const gameState = { players, fase };
 
     if (fase == 2) {
-        return <div className="result">
+        return <div className="result" style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
              <Header as='h2'>Jogo iniciado</Header>
-             <Button onClick={() => result(gameState, setGameState)} positive icon labelPosition='right'>
+             <Button onClick={() => result(gameState, setGameState)}  color='olive' icon labelPosition='right'>
                 Revelar os Bandidim
                 <Icon name='right arrow' />
             </Button>
