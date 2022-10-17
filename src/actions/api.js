@@ -27,7 +27,8 @@ export const initGame = async (gameState, setGameState) => {
                     "Joanderson",
                     "Gabriel",
                     "Maurinho",
-                    "Glenda"
+                    "Glenda",
+                    "Pedro",
                 ]
             }
         )

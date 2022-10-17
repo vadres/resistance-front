@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Container } from 'semantic-ui-react';
 
-import Info from '../components/info';
-import Top from '../components/top';
-import Resultado from '../components/resultado';
-import AddPlayer from '../components/add-player';
 import './App.css';
 import { GameContext, gameStateEmpty } from '../context/game-context';
 import { initGame } from '../actions/api';
+import SeeFunctions from './see-functions/see-functions';
+import SelectPlayers from './select-players/select-players';
 
 function App() {
   const [ gameState, setGameState ] = useState(gameStateEmpty);
@@ -19,12 +16,8 @@ function App() {
 
   return (
     <GameContext.Provider value={{ ...gameState, setGameState }}>
-      <Container text>
-        <AddPlayer />
-        <Top />
-        <Info />
-        <Resultado />
-      </Container>
+      <SelectPlayers />
+      <SeeFunctions />
     </GameContext.Provider>
   );
 }
