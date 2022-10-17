@@ -9,7 +9,7 @@ function PlayerLabel({ player, onClick }) {
         <div style={{ margin: "10px 0" }}>
             <Label className="disable-select" as='a' color={color} onClick={() => setColor(onClick())}>
                 <Image avatar spaced='right' src={require('../images/user.png')} />
-                {player}
+                {player.nome}
             </Label>                
         </div>
     );

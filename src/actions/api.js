@@ -13,31 +13,33 @@ export const verFuncao = async (gameState, setGameState) => {
     });
 };
 
-export const initGame = async (gameState, setGameState) => {
-    await fetch("http://10.80.40.41:8080/init", {
+export const searchAllPlayers = async (gameState, setGameState) => {
+    await fetch("http://10.80.40.41:8080/jogador/all")
+    .then((response) => response.json())
+    .then(data => {
+        console.log(data)
+        setGameState({
+            ...gameState,
+            players: data,           
+            fase: 0            
+        }); 
+    });
+}
+
+export const initGame = async (players, gameState, setGameState) => {
+    await fetch("http://10.80.40.41:8080/jogo/iniciar", {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(
-            {
-                "players": [
-                    "Victor",
-                    "Joanderson",
-                    "Gabriel",
-                    "Maurinho",
-                    "Glenda",
-                    "Pedro",
-                ]
-            }
-        )
+        body: JSON.stringify({ "jogadores": players })
     }).then((response) => response.json())
     .then(data => {
         setGameState({
             ...gameState,
             players: data,
-            nome: data[data.length - 1],
+            nome: data[data.length - 1].nome,
             fase: 0            
         }); 
     });
