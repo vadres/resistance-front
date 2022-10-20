@@ -1,11 +1,11 @@
 import React from "react";
 
 export const gameStateEmpty = {
-    players: [],
-    nome: "",   
-    funcao: "",
-    observar: "",
-    vistos: [],
+    jogadores: [],
+    jogador: "",   
+    personagem: "",
+    info: "",
+    revelados: [],
     fase: 0,
 }
 

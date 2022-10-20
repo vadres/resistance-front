@@ -1,30 +1,32 @@
 import { useEffect, useState } from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Container } from 'semantic-ui-react';
 
-import Info from '../components/info';
-import Top from '../components/top';
-import Resultado from '../components/resultado';
-import AddPlayer from '../components/add-player';
 import './App.css';
 import { GameContext, gameStateEmpty } from '../context/game-context';
-import { initGame } from '../actions/api';
+import { buscarTodosJogadores } from '../actions/api';
+import GetInfo from './get-info/GetInfo';
+import SelectPlayers from './select-players/SelectPlayers';
 
 function App() {
   const [ gameState, setGameState ] = useState(gameStateEmpty);
 
+  const getPage = () => {
+    const { fase } = gameState;
+    return fase <= 1? <SelectPlayers />: <GetInfo />
+  }
+
   useEffect(() => {
-    initGame(gameState, setGameState);
-  }, [initGame]);
+    let state =  buscarTodosJogadores();
+   
+    setGameState({
+      ...gameState,
+      ...state           
+    }); 
+  }, [buscarTodosJogadores]);
 
   return (
     <GameContext.Provider value={{ ...gameState, setGameState }}>
-      <Container text>
-        <AddPlayer />
-        <Top />
-        <Info />
-        <Resultado />
-      </Container>
+      { getPage() }
     </GameContext.Provider>
   );
 }

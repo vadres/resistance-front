@@ -9,7 +9,7 @@ const Resultado = () => {
     const { players, fase, setGameState } = useContext(GameContext); 
     const gameState = { players, fase };
 
-    if (fase == 2) {
+    if (fase == 4) {
         return <div className="result" style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
              <Header as='h2'>Jogo iniciado</Header>
              <Button onClick={() => result(gameState, setGameState)}  color='olive' icon labelPosition='right'>
@@ -17,7 +17,7 @@ const Resultado = () => {
                 <Icon name='right arrow' />
             </Button>
         </div>;
-    } else if (fase == 3) {
+    } else if (fase == 5) {
         return <div className="result">
             <List selection verticalAlign='middle'>
                 {
