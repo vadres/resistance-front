@@ -9,7 +9,7 @@ const Info = () => {
     const { fase, players, nome, funcao, observar, vistos, setGameState } = useContext(GameContext);   
     const gameState = { fase, players, nome, funcao, observar, vistos };
 
-    return (fase == 1)?
+    return (fase == 3)?
         <div className="info">
             <Header as='h2'>{nome}</Header>
             <Image src={require(`../images/${funcao}.png`)} circular size='tiny' />

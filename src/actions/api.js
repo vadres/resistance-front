@@ -1,49 +1,29 @@
-export const verFuncao = async (gameState, setGameState) => {
-    await fetch("http://10.80.40.41:8080/search/" + gameState.players.pop())
-    .then((response) => response.json())
-    .then(data => {
-        setGameState({
-            ...gameState,
-            players: gameState.players,
-            funcao: data['minhaPosicao'],
-            observar: data['observar'],
-            vistos: data['players'],
-            fase: 1            
-        });      
-    });
-};
+import axios from "axios";
 
-export const searchAllPlayers = async (gameState, setGameState) => {
-    await fetch("http://10.80.40.41:8080/jogador/all")
-    .then((response) => response.json())
-    .then(data => {
-        console.log(data)
-        setGameState({
-            ...gameState,
-            players: data,           
-            fase: 0            
-        }); 
-    });
+axios.defaults.baseURL = "http://192.168.0.6:8080";
+
+export const buscarTodosJogadores = async () => {
+    const { data } = await axios.get("/jogador/all");
+    const { jogadores, fase } = data;
+
+    console.log(data)
+    return {
+        jogadores,
+        fase
+    }
 }
 
-export const initGame = async (players, gameState, setGameState) => {
-    await fetch("http://10.80.40.41:8080/jogo/iniciar", {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ "jogadores": players })
-    }).then((response) => response.json())
-    .then(data => {
-        setGameState({
-            ...gameState,
-            players: data,
-            nome: data[data.length - 1].nome,
-            fase: 0            
-        }); 
-    });
+export const iniciarJogo = async (jogadores) => {
+    const { data } = await axios.post("jogo/iniciar", { jogadores });
+
+    return {
+        jogadores: data,
+        jogador: data[data.length - 1].nome,
+        fase: 2 
+    };
 }
+
+export const verInformacoes = async () => ({ fase: 3 });
 
 export const next = (gameState, setGameState) => {
     if (gameState.players.length - 1 < 0) {
