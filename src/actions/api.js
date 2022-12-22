@@ -1,20 +1,25 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://192.168.0.6:8080";
+axios.defaults.baseURL = "http://192.168.0.7:8080";
 
 export const buscarTodosJogadores = async () => {
     const { data } = await axios.get("/jogador/all");
     const { jogadores, fase } = data;
 
-    console.log(data)
     return {
         jogadores,
         fase
     }
 }
 
-export const iniciarJogo = async (jogadores) => {
-    const { data } = await axios.post("jogo/iniciar", { jogadores });
+export const novoJogador = async (nome) => {
+    await axios.post("jogador/novo/" + nome);
+    return buscarTodosJogadores();
+}
+
+
+export const iniciarJogo = async (jogadores, tipoJogo) => {
+    const { data } = await axios.post("jogo/iniciar", { jogadores, tipoJogo });
 
     return {
         jogadores: data,

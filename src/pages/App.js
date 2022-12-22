@@ -16,12 +16,16 @@ function App() {
   }
 
   useEffect(() => {
-    let state =  buscarTodosJogadores();
-   
-    setGameState({
-      ...gameState,
-      ...state           
-    }); 
+    const fetchData = async () => {
+      let state = await buscarTodosJogadores();
+      
+      setGameState({
+        ...gameState,
+        ...state           
+      }); 
+    }
+
+    fetchData();
   }, [buscarTodosJogadores]);
 
   return (
