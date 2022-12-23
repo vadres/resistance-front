@@ -6,12 +6,12 @@ import { GameContext } from "../context/game-context";
 import { verInformacoes } from "../actions/api";
 
 const Top = () => {
-    const { nome, fase, players, setGameState } = useContext(GameContext);
-    const gameState = { nome, fase, players };
-
+    const gameState = useContext(GameContext);
+    const { jogador, fase, jogadores, setGameState } = gameState;
+ 
     return (fase == 2)?
         <div className="info">
-            <Header as='h2'>{nome}</Header>
+            <Header as='h2'>{jogador.nome}</Header>
             <Button onClick={() => verInformacoes(gameState, setGameState)} color='twitter' icon labelPosition='right'>
                 Ver função
                 <Icon name='right arrow' />

@@ -4,8 +4,8 @@ const Vistos = ({ atores }) => (
     <List selection horizontal>
         {
             atores.map(ator => (
-                <List.Item key={ator.name}>
-                    <List.Header as={'a'}>{ator.name}</List.Header>
+                <List.Item key={ator}>
+                    <List.Header as={'a'}>{ator}</List.Header>
                 </List.Item>
             ))
         }

@@ -59,7 +59,7 @@ function SelectPlayers() {
         <Form>
             <Form.Field>
                 <label>Tipo de Jogo</label>
-                <select ref={tipoJogoRef} class="ui fluid search dropdown">
+                <select ref={tipoJogoRef} className="ui fluid search dropdown">
                     <option value={1}>Simples</option>
                     <option value={2}>Com comandante</option>
                     <option value={3}>Com falso comandante</option>
@@ -87,7 +87,7 @@ function SelectPlayers() {
             {
                 jogadores.map(jogador => (
                     <Grid.Column key={jogador.id}>
-                        <PlayerLabel key={jogador.id} player={jogador} onClick={() => handleClickLabel(jogador)} />
+                        <PlayerLabel key={jogador.id} jogador={jogador} onClick={() => handleClickLabel(jogador)} />
                     </Grid.Column>
                 ))
             }

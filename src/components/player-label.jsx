@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Label, Image, Button } from 'semantic-ui-react';
 
-function PlayerLabel({ player: jogador, onClick }) {
+function PlayerLabel({ jogador, onClick }) {
     const [ color, setColor ] = useState("teal");
 
     return (

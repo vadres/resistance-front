@@ -1,13 +1,16 @@
 import Vistos from "./vistos";
-import { Header, Image, Button, Icon, List } from 'semantic-ui-react';
+import { Header, Image, Button, Icon, List, Grid } from 'semantic-ui-react';
 import { useContext } from "react";
 import { GameContext } from "../context/game-context";
 
-import { result } from "../actions/api";
+import { result, atualizarPlacar } from "../actions/api";
 
 const Resultado = () => { 
-    const { players, fase, setGameState } = useContext(GameContext); 
-    const gameState = { players, fase };
+    const vencedorResistencia = "RESISTENCIA";
+    const vencedorEspioes = "ESPIOES";
+
+    const gameState = useContext(GameContext); 
+    const { jogadores, fase, setGameState } = gameState;
 
     if (fase == 4) {
         return <div className="result" style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
@@ -21,16 +24,29 @@ const Resultado = () => {
         return <div className="result">
             <List selection verticalAlign='middle'>
                 {
-                    players.map(player => (
-                        <List.Item key={player.name}>
-                        <Image avatar src={require(`../images/${player['function']}.png`)} />
+                    jogadores.map(jogador => (
+                        <List.Item key={jogador.nome}>
+                        <Image avatar src={require(`../images/${jogador['personagem']}.png`)} />
                         <List.Content>
-                            <List.Header as='a'>{player.name}</List.Header>
+                            <List.Header as='a'>{jogador.nome}</List.Header>
                         </List.Content>
                         </List.Item>
                     ))
                 }
             </List>    
+            <Grid columns={2}>
+                <Grid.Column>
+                    <Button onClick={() => atualizarPlacar(vencedorResistencia, gameState, setGameState)}  color='facebook'>
+                        Resistência
+                    </Button>
+                </Grid.Column>
+                <Grid.Column>
+                    <Button onClick={() => atualizarPlacar(vencedorEspioes, gameState, setGameState)} color='google plus'>
+                        Espiões
+                    </Button>
+                </Grid.Column>
+
+            </Grid>
         </div>;
     } else {
         return <></>;

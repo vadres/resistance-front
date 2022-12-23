@@ -6,16 +6,16 @@ import { GameContext } from "../context/game-context";
 import { next } from "../actions/api";
 
 const Info = () => { 
-    const { fase, players, nome, funcao, observar, vistos, setGameState } = useContext(GameContext);   
-    const gameState = { fase, players, nome, funcao, observar, vistos };
+    const gameState = useContext(GameContext);   
+    const { fase, jogador, setGameState } = gameState;
 
     return (fase == 3)?
         <div className="info">
-            <Header as='h2'>{nome}</Header>
-            <Image src={require(`../images/${funcao}.png`)} circular size='tiny' />
-            <Header color='orange' as='h3'>{funcao}</Header>      
-            <Header as='h4'>{observar}</Header>
-            <Vistos atores={vistos} />
+            <Header as='h2'>{jogador.nome}</Header>
+            <Image src={require(`../images/${jogador.personagem}.png`)} circular size='tiny' />
+            <Header color='orange' as='h3'>{jogador.personagem}</Header>      
+            <Header as='h4'>{jogador.info}</Header>
+            <Vistos atores={jogador.revelados} />
             <br />
             <Button onClick={() => next(gameState, setGameState)} positive icon labelPosition='right'>
                 Próximo

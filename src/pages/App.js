@@ -3,7 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import './App.css';
 import { GameContext, gameStateEmpty } from '../context/game-context';
-import { buscarTodosJogadores } from '../actions/api';
+import { buscarTodosJogadores, placar } from '../actions/api';
 import GetInfo from './get-info/GetInfo';
 import SelectPlayers from './select-players/SelectPlayers';
 
